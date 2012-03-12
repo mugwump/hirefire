@@ -82,7 +82,9 @@ module HireFire
           if environment = HireFire.configuration.environment
             environment.to_s.camelize
           else
-            ENV.include?('HEROKU_UPID') ? 'Heroku' : 'Noop'
+            #ENV.include?('HEROKU_UPID') ? 'Heroku' : 'Noop'
+            # TODO is there are better way to check if we are running on heroku?!
+            ::Rails.env.production? ? 'Heroku' : 'Noop'
           end
         ).new
       end
